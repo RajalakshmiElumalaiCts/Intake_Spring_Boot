@@ -17,6 +17,8 @@ import com.intake.model.JwtRequest;
 import com.intake.model.JwtResponse;
 
 @RestController
+//Spring security will allow the URL with '/authenticate' combined with the contect path('/intake').
+//But adding additional variable like 'auth_api' to the URI as below, will not be allowed by spring security
 //@RequestMapping(value = "/auth_api")
 public class AuthenticationController {
 	

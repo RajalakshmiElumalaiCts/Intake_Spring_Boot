@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/time_api")
-public class IntakeController {
+public class TimeApiController {
 	
 		@RequestMapping("/local_time")
 		public String getLocalTime() {
