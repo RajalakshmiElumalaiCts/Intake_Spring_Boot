@@ -19,8 +19,8 @@ public class JwtUtil {
 	@Value("${jwt.secret}")
 	private String secret_key;
 	
-	//Keeping 5 hrs exp time for a token
-	private static final long JWT_EXP_TOKEN = 1000* 5 * 60 * 60;
+	//Keeping 1 hr exp time for a token
+	private static final long JWT_EXP_TOKEN = 1000* 1 * 60 * 60;
 	
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
