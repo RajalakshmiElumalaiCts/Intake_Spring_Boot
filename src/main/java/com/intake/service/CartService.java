@@ -5,9 +5,20 @@ import com.intake.model.db.CartItem;
 
 public interface CartService {
 
-	void addCartItem();
-	CartItem getCartItem();
-	Cart getCart();
-	void addCart();
+	CartItem addCartItem(CartItem cartItem);
+	
+	CartItem getCartItem(int cartItemId);
+	
+	Cart getCart(int cartId);
+	
+	Cart addCart(Cart cart);
+	
+	void deleteCart(int id);
+	
+	void deleteCartItem(int id, int cartId);
+	
+	CartItem updateCartItemQuantity(int id, int newQuantity);
+	
+	CartItem getCartItemBySalesItemIdAndCartId(int salesItemId, int cartId);
 	
 }

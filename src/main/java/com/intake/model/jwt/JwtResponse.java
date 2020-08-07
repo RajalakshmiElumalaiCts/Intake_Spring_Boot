@@ -1,4 +1,4 @@
-package com.intake.model;
+package com.intake.model.jwt;
 
 public class JwtResponse {
 	

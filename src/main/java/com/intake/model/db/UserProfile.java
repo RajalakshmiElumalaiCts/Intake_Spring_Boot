@@ -1,10 +1,13 @@
 package com.intake.model.db;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +31,9 @@ public class UserProfile {
 	
 	@Column(name="birthday")
 	private Date dob;
+	
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<Cart> carts;
 	
 	public UserProfile() {
 		
@@ -90,9 +96,11 @@ public class UserProfile {
 	public void setDob(Date dob) {
 		this.dob = dob;
 	}
-	
-	
-	
+
+	public Set<Cart> getCarts() {
+		return carts;
+	}
+
 	
 }
 

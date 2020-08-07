@@ -2,38 +2,49 @@ package com.intake.model.db;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "cart_item")
 public class CartItem {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	@Column(name = "sales_item_id")
 	private int salesItemId;
 	
 	@Column(name = "sales_item_name")
-	private int salesItemName;
+	private String salesItemName;
 	 
 	@Column(name = "sales_item_price")
-	private int salesItemPrice;
+	private float salesItemPrice;
 	
 	@Column(name = "sales_item_quantity")
 	private int salesItemQuantity;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cart_id", nullable = false)
+    private Cart cart;
 	
 	public CartItem(){
 
     }
 	
-    public CartItem(int salesItemId, int salesItemName, int salesItemPrice, int salesItemQuantity) {
+    public CartItem(int salesItemId, String salesItemName, float salesItemPrice, int salesItemQuantity, Cart cart) {
 		super();
 		this.salesItemId = salesItemId;
 		this.salesItemName = salesItemName;
 		this.salesItemPrice = salesItemPrice;
 		this.salesItemQuantity = salesItemQuantity;
+		this.cart = cart;
 	}
 
 	public int getId() {
@@ -52,19 +63,19 @@ public class CartItem {
 		this.salesItemId = salesItemId;
 	}
 
-	public int getSalesItemName() {
+	public String getSalesItemName() {
 		return salesItemName;
 	}
 
-	public void setSalesItemName(int salesItemName) {
+	public void setSalesItemName(String salesItemName) {
 		this.salesItemName = salesItemName;
 	}
 
-	public int getSalesItemPrice() {
+	public float getSalesItemPrice() {
 		return salesItemPrice;
 	}
 
-	public void setSalesItemPrice(int salesItemPrice) {
+	public void setSalesItemPrice(float salesItemPrice) {
 		this.salesItemPrice = salesItemPrice;
 	}
 
@@ -76,5 +87,12 @@ public class CartItem {
 		this.salesItemQuantity = salesItemQuantity;
 	}
 
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
     
 }

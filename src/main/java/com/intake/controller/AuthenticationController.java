@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.intake.jwt.JwtUtil;
 import com.intake.jwt.JwtUserDetailsService;
-import com.intake.model.JwtRequest;
-import com.intake.model.JwtResponse;
+import com.intake.model.jwt.JwtRequest;
+import com.intake.model.jwt.JwtResponse;
 
 @RestController
 //Spring security will allow the URL with '/authenticate' combined with the contect path('/intake').
