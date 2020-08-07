@@ -1,8 +1,12 @@
 package com.intake.controller.api.cart;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +16,7 @@ import com.intake.model.db.Cart;
 import com.intake.model.db.CartItem;
 import com.intake.model.db.UserProfile;
 import com.intake.model.ui.CartObject;
+import com.intake.model.ui.UICartItem;
 import com.intake.model.ui.response.CartResponse;
 import com.intake.service.CartService;
 import com.intake.service.UserService;
@@ -83,6 +88,31 @@ public class CartController {
 		
 		return "{  \"status\" : \"Failed\" }";
 		
+	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/view_cart/{cart_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<UICartItem> viewCart(@PathVariable("cart_id") final String cartId) {
+		
+		List<CartItem> cartItems = null;
+		List<UICartItem> uiCartItems = null;
+		if(cartId != null) {
+			cartItems = cartService.getAllCartItems(Integer.valueOf(cartId));
+			uiCartItems = createUICartItems(cartItems);
+		}
+		
+		return uiCartItems;
+		
+	}
+
+	private List<UICartItem> createUICartItems(List<CartItem> cartItems) {
+
+		List<UICartItem> uiCartItems =  cartItems.stream().map(cartItem -> 
+			new UICartItem(cartItem.getId(), cartItem.getSalesItemId(), 
+					cartItem.getSalesItemName(),cartItem.getSalesItemPrice(),cartItem.getSalesItemQuantity(),
+					cartItem.getCart().getId())).collect(Collectors.toList());
+		
+		return uiCartItems;
 	}
 	
 }

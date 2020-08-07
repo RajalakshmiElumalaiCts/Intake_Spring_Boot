@@ -8,7 +8,11 @@ import com.intake.model.db.CartItem;
 import com.intake.repository.CartItemRepository;
 import com.intake.repository.CartRepository;
 import com.intake.service.CartService;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CartServiceImpl implements CartService{
@@ -77,6 +81,14 @@ public class CartServiceImpl implements CartService{
 			return option.get();	
 		}
 		return null;
+	}
+
+	@Override
+	public List<CartItem> getAllCartItems(int cartId) {
+		List<Integer> cartIds = new ArrayList<>();
+		cartIds.add(cartId);
+		List<CartItem> cartItems = cartItemRepository.findAllByCartId(cartId);
+		return cartItems;
 	}
 
 }

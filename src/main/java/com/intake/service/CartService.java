@@ -1,5 +1,7 @@
 package com.intake.service;
 
+import java.util.List;
+
 import com.intake.model.db.Cart;
 import com.intake.model.db.CartItem;
 
@@ -20,5 +22,7 @@ public interface CartService {
 	CartItem updateCartItemQuantity(int id, int newQuantity);
 	
 	CartItem getCartItemBySalesItemIdAndCartId(int salesItemId, int cartId);
+
+	List<CartItem> getAllCartItems(int cartId);
 	
 }
